@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block head %}    
+    <link rel='stylesheet' type='text/css' href="{% static 'css/gallery-stylezzzz.css' %}"> 
+{% endblock head %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+    <section class='gallery'>
+    
+    <form method='POST' class='form' enctype='multipart/form-data'>
+        {% csrf_token %}
+            <p class='validation_msg'></p>
+            {{form.description}}
+            <input type='file'>
+            <label class='uploader'>
+                {{fileform.image}}
+                Select
+            </label>
+            <p class="img-error-msg">Select image</p>
+        <button class='post'>Post</button>
+    </form>
+</section>
+{% endblock content %}

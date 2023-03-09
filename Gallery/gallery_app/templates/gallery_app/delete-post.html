@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block head %}    
+    <link rel='stylesheet' type='text/css' href="{% static 'css/gallery-stylezzzz.css' %}"> 
+{% endblock head %}
+
+{% block title %}
+Delete Post
+{% endblock title %}
+
+{% block content %}
+
+<section>
+    <div class='del-post'>
+        <div class='delete-div'>
+            <img src="/static/{{post_to_delete.image.url}}" alt='' class='delete-img'>
+            <p class='description'>{{post_to_delete.description}}</p> 
+        </div>
+        <form method='POST' class='form-delete'>
+            {% csrf_token %}
+            <p class='confirm-delete'>Are You Sure You want to Delete?</p>
+            <div class='yes-no-btn-div'>
+                <button class='no-btn' name='no'>No</button>
+                <button class='yes-btn' name='yes'>Yes</button>
+            </div>
+        </form>
+    
+    </div>
+</section>
+
+
+{% endblock content %}

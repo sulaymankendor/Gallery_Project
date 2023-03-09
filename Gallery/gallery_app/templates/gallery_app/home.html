@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block head %}    
+    <link rel='stylesheet' type='text/css' href="{% static 'css/gallery-stylezzzz.css' %}"> 
+
+{% endblock head %}
+
+{% block title %}
+Gallery
+{% endblock title %}
+
+{% block content %}
+<section style='position: relative;'>
+    <img src="{% static 'images/header-image.jpg'%}" alt='kjds' class='hero-img'>
+    <div class='dark'></div>
+    <div class='hero-h-p'>
+        <h1 class='hero-h'>Image<span style='color: #00d1d1;'>Gallery</span></h1>
+        <p class='hero-p'>Post Your Pictures and Have a Beautiful Gallery. </p>
+    </div>
+</section>
+<section>
+    <section>
+        {% if count_posts > 0%}
+            <h3 style='text-align: center; margin-top: 10vh; font-size: 2rem; font-family: sans-serif; color: white;'>Number of posts: {{count_posts}}</h3> 
+            <div style='display: flex; justify-content: space-evenly; align-items: center; margin-top: 18px; margin-bottom: -30px;'>
+                <a href='post' class='post-image'>+</a>
+                <form method='POST'>
+                    {% csrf_token %}
+                    <button name='delete_all' class='delete-all-posts-btn'>Delete All</button>
+                </form>
+            </div>
+            <section class='post-section'>
+                {% for gallery in galleries %}
+                    <div class='div-post'>
+                        <img src="/static/{{gallery.image.url}}" alt='{{gallery.description}}' class='img'>
+                        <p class='post-description'>{{gallery.description}}</p> 
+                        <div class='update-delete-btn'>
+                            <a href='{% url "update-post" gallery.id %}' class='update-post'>Update</a>
+                            <a href='{% url "delete-post" gallery.id %}' class='delete-post'>Delete</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        {% else %}
+            <p style='text-align: center; margin-top: 10vh; font-size: 2rem; font-family: sans-serif; color: white;'>No Posts</p>
+            <div style='max-width: 46px; margin: auto;'>
+                <a href='post' class='post-image'>+</a>
+            </div>
+        {% endif %}
+    </section>
+</section>
+{% endblock content %}
